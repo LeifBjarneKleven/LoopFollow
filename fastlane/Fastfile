@@ -205,7 +205,14 @@ platform :ios do
       git_basic_authorization: Base64.strict_encode64("#{GITHUB_REPOSITORY_OWNER}:#{GH_PAT}")
     )
   end
-  
+
+  desc "adde by Leif on Oct 08 2025"
+  lane :beta do
+    get_certificates           # invokes cert
+    get_provisioning_profile   # invokes sigh
+    build_app
+  end
+
   desc "Check Certificates and Trigger Workflow for Expired or Missing Certificates"
   lane :check_and_renew_certificates do
     setup_ci if ENV['CI']
